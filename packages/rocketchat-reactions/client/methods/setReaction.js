@@ -8,6 +8,11 @@ Meteor.methods({
 
 		const user = Meteor.user();
 
+        room = RocketChat.models.Rooms.findOneById(message.rid)
+        if (_.contains(room.muted, user.username) {
+            throw new Meteor.Error('user-muted')
+        }
+
 		if (message.reactions && message.reactions[reaction] && message.reactions[reaction].usernames.indexOf(user.username) !== -1) {
 			message.reactions[reaction].usernames.splice(message.reactions[reaction].usernames.indexOf(user.username), 1);
 
